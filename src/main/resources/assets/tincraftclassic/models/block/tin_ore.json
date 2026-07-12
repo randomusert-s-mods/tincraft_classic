@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "tincraftclassic:blocks/tin_ore"
+  }
+}

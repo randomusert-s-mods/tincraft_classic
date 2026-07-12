@@ -1,1 +1,8 @@
 item.tincraftclassic.tin_ingot.name=Tin Ingot
+
+# Block item translations. in 1.12.2 they are usually under tile.modid.registry_name.name
+# For example:
+#     tile.tincraft.tin_block.name
+
+tile.tincraftclassic.tin_ore.name=Tin ore
+tile.tincraftclassic.tin_block.name=Block of Tin

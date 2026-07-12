@@ -3,4 +3,6 @@
 ## [0.1.0]
 
 ### Added
-- Content
+- Tin ingot
+- Tin block
+- Tin ore
