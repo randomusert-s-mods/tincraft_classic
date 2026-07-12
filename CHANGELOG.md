@@ -6,3 +6,6 @@
 - Tin ingot
 - Tin block
 - Tin ore
+- Recipes
+- world gen
+- Creative tab

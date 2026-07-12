@@ -1,10 +1,12 @@
 package io.github.randomusert.mods.tincraftclassic;
 
 import io.github.randomusert.mods.tincraftclassic.init.*;
+import io.github.randomusert.mods.tincraftclassic.world.gen.TCCWorldGen;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,6 +31,7 @@ public class Tincraftclassic {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         RegistrationHandler.initRegistries();
+        GameRegistry.registerWorldGenerator(new TCCWorldGen(), 0);
     }
 
 }
