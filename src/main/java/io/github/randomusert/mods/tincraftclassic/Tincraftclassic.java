@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION)
 public class Tincraftclassic {
+    public static final String MODID = Tags.MOD_ID;
 
     public static final Logger LOGGER = LogManager.getLogger(Tags.MOD_NAME);
 
@@ -19,7 +20,6 @@ public class Tincraftclassic {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         LOGGER.info("Hello From {}!", Tags.MOD_NAME);
-        ModInit.ModInit();
     }
 
 }

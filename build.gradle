@@ -247,6 +247,9 @@ idea {
                 "4. Run Obfuscated Server"(Gradle) {
                     taskNames = ["runObfServer"]
                 }
+                "5. Build"(Gradle) {
+                    taskNames = ["build"]
+                }
             }
             compiler.javac {
                 afterEvaluate {
