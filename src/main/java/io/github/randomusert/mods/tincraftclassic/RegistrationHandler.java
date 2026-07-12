@@ -34,8 +34,8 @@ public class RegistrationHandler {
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         Tincraftclassic.LOGGER.info("Registering blocks");
         final Block[] blocks = {
-                RegistryUtil.setBlockName(new Block(Material.IRON), "tin_block").setCreativeTab(CreativeTabs.MISC),
-                RegistryUtil.setBlockName(new Block(Material.ROCK), "tin_ore").setCreativeTab(CreativeTabs.MISC)
+                RegistryUtil.setBlockName(new Block(Material.IRON), "tin_block").setCreativeTab(Tincraftclassic.TCC_TAB),
+                RegistryUtil.setBlockName(new Block(Material.ROCK), "tin_ore").setCreativeTab(Tincraftclassic.TCC_TAB)
         };
 
         event.getRegistry().registerAll(blocks);

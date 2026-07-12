@@ -6,3 +6,7 @@ item.tincraftclassic.tin_ingot.name=Tin Ingot
 
 tile.tincraftclassic.tin_ore.name=Tin ore
 tile.tincraftclassic.tin_block.name=Block of Tin
+
+
+# Unlike in modern versions of the game 1.12.2 at least uses itemGroup.*
+itemGroup.tincraftclassic=Tincraft Classic Creative mode tab

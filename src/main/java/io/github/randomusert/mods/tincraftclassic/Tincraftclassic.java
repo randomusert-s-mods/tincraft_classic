@@ -1,6 +1,7 @@
 package io.github.randomusert.mods.tincraftclassic;
 
 import io.github.randomusert.mods.tincraftclassic.init.*;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -12,6 +13,8 @@ public class Tincraftclassic {
     public static final String MODID = Tags.MOD_ID;
 
     public static final Logger LOGGER = LogManager.getLogger(Tags.MOD_NAME);
+
+    public static final CreativeTabs TCC_TAB = new TCCTab();
 
     /**
      * <a href="https://cleanroommc.com/wiki/forge-mod-development/event#overview">
