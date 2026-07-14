@@ -1,5 +1,6 @@
 package io.github.randomusert.mods.tincraftclassic.world.gen;
 
+import io.github.randomusert.mods.tincraftclassic.config.ConfigManager;
 import io.github.randomusert.mods.tincraftclassic.init.ModBlocks;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
@@ -18,7 +19,7 @@ public class TCCWorldGen implements IWorldGenerator {
     private final WorldGenMinable tccOverworldGen;
 
     public TCCWorldGen() {
-        tccOverworldGen = new WorldGenMinable(ModBlocks.TIN_ORE.getDefaultState(), 15, BlockMatcher.forBlock(Blocks.STONE));
+        tccOverworldGen = new WorldGenMinable(ModBlocks.TIN_ORE.getDefaultState(), ConfigManager.getConfig().worldGeneration.tinOreVeinSize, BlockMatcher.forBlock(Blocks.STONE));
     }
 
     @Override
@@ -29,7 +30,7 @@ public class TCCWorldGen implements IWorldGenerator {
                 break;
 
             case OVERWORLD:
-                genStandard(tccOverworldGen, world, random, chunkX, chunkZ, 10, 0, 200);
+                genStandard(tccOverworldGen, world, random, chunkX, chunkZ, ConfigManager.getConfig().worldGeneration.tinOreVeinsPerChunk, 0, 200);
                 break;
 
             case THE_END:

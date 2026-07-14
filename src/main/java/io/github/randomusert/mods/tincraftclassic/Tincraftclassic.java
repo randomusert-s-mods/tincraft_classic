@@ -1,5 +1,6 @@
 package io.github.randomusert.mods.tincraftclassic;
 
+import io.github.randomusert.mods.tincraftclassic.config.ConfigManager;
 import io.github.randomusert.mods.tincraftclassic.init.*;
 import io.github.randomusert.mods.tincraftclassic.world.gen.TCCWorldGen;
 import net.minecraft.creativetab.CreativeTabs;
@@ -18,20 +19,22 @@ public class Tincraftclassic {
 
     public static final CreativeTabs TCC_TAB = new TCCTab();
 
-    /**
-     * <a href="https://cleanroommc.com/wiki/forge-mod-development/event#overview">
-     *     Take a look at how many FMLStateEvents you can listen to via the @Mod.EventHandler annotation here
-     * </a>
-     */
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         LOGGER.info("Hello From {}!", Tags.MOD_NAME);
+        ConfigManager.load();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         RegistrationHandler.initRegistries();
-        GameRegistry.registerWorldGenerator(new TCCWorldGen(), 0);
+
+
+        if (ConfigManager.getConfig().worldGeneration.spawnTinOre) {
+            GameRegistry.registerWorldGenerator(new TCCWorldGen(), 0);
+        } else {
+            LOGGER.info("Config: Tin Ore spawning disabled");
+        }
     }
 
 }

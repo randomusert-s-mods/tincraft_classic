@@ -9,3 +9,8 @@
 - Recipes
 - world gen
 - Creative tab
+
+## [0.1.1]
+
+### Added
+- Config options to tweak ore gen
