@@ -20,4 +20,17 @@ public class Config {
     public static class Recipes {
         public boolean smeltTinOreToTinIngot = true;
     }
+
+    // Config for generators
+    public GeneratorTileEntityConfig  generatorTileEntityConfig = new GeneratorTileEntityConfig();
+
+    public  static class GeneratorTileEntityConfig {
+        public int generalGenCapacity = 1000;
+
+        public int passiveGenerationAmount = 20;
+
+        public int burnGenerationAmount = 50;
+
+        public int brambleBurnTime = 200;
+    }
 }
