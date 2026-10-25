@@ -26,6 +26,7 @@ public class Config {
 
     public  static class GeneratorTileEntityConfig {
         public int generalGenCapacity = 1000;
+        public int maxBurnTime = 100;
 
         public int passiveGenerationAmount = 20;
 
