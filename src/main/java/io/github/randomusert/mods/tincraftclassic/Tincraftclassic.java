@@ -27,6 +27,7 @@ public class Tincraftclassic {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+        GameRegistry.registerTileEntity(io.github.randomusert.mods.tincraftclassic.tileentity.TileEntityGenerator.class, "tin_generator");
         RegistrationHandler.initRegistries();
 
 

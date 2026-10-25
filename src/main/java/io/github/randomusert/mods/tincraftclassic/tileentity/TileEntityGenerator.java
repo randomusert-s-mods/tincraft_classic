@@ -9,52 +9,62 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 
-public class TileEntityGenerator extends TileEntity implements ITickable {
+import com.cleanroommc.modularui.api.IGuiHolder;
+import com.cleanroommc.modularui.factory.PosGuiData;
+import com.cleanroommc.modularui.screen.ModularPanel;
+import com.cleanroommc.modularui.screen.UISettings;
+import com.cleanroommc.modularui.value.sync.PanelSyncManager;
 
-    private final TCEnergyStorage energyStorage = new TCEnergyStorage(100000, 1000);
+public class TileEntityGenerator extends TileEntity implements ITickable, IGuiHolder<PosGuiData> {
+
+    private static final int ENERGY_CAPACITY = 100000;
+    private static final int ENERGY_TRANSFER_RATE = 1000;
+    private static final int ENERGY_GENERATION_RATE = 50;
+
+    private final TCEnergyStorage energyStorage = new TCEnergyStorage(ENERGY_CAPACITY, ENERGY_TRANSFER_RATE);
 
     @Override
     public void update() {
-        if (!world.isRemote) {
-            this.energyStorage.generateEnergy(50);
-
-            this.distributeEnergy();
-
-            this.markDirty();
+        if (world.isRemote) {
+            return;
         }
+
+        energyStorage.generateEnergy(ENERGY_GENERATION_RATE);
+        distributeEnergy();
+        markDirty();
     }
 
     private void distributeEnergy() {
         for (EnumFacing facing : EnumFacing.values()) {
             TileEntity neighbor = world.getTileEntity(pos.offset(facing));
-            if (neighbor != null && neighbor.hasCapability(CapabilityEnergy.ENERGY, facing.getOpposite())) {
-                IEnergyStorage neighborStorage = neighbor.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite());
-                if (neighborStorage != null && neighborStorage.canReceive()) {
-
-                    int energyToSend = this.energyStorage.extractEnergy(1000, true);
-
-                    int accepted = neighborStorage.receiveEnergy(energyToSend, false);
-
-                    this.energyStorage.extractEnergy(accepted, false);
-                }
+            if (neighbor == null) {
+                continue;
             }
+
+            EnumFacing oppositeFacing = facing.getOpposite();
+            IEnergyStorage neighborStorage = neighbor.getCapability(CapabilityEnergy.ENERGY, oppositeFacing);
+            if (neighborStorage == null || !neighborStorage.canReceive()) {
+                continue;
+            }
+
+            int energyToSend = energyStorage.extractEnergy(ENERGY_TRANSFER_RATE, true);
+            int accepted = neighborStorage.receiveEnergy(energyToSend, false);
+            energyStorage.extractEnergy(accepted, false);
         }
     }
 
-    // Saving energy amount to NBT
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
-        compound.setInteger("Energy", this.energyStorage.getEnergyStored());
+        compound.setInteger("Energy", energyStorage.getEnergyStored());
         return compound;
     }
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
-        this.energyStorage.generateEnergy(compound.getInteger("Energy"));
+        energyStorage.setEnergyStored(compound.getInteger("Energy"));
     }
-
 
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
@@ -67,8 +77,15 @@ public class TileEntityGenerator extends TileEntity implements ITickable {
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
         if (capability == CapabilityEnergy.ENERGY) {
-            return CapabilityEnergy.ENERGY.cast(this.energyStorage);
+            return CapabilityEnergy.ENERGY.cast(energyStorage);
         }
         return super.getCapability(capability, facing);
+    }
+
+    @Override
+    public ModularPanel buildUI(PosGuiData arg0, PanelSyncManager arg1, UISettings arg2) {
+        ModularPanel panel = ModularPanel.defaultPanel("generator_ui");
+        panel.bindPlayerInventory();
+        return panel;
     }
 }

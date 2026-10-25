@@ -4,6 +4,7 @@ import io.github.randomusert.mods.tincraftclassic.init.ModBlocks;
 import io.github.randomusert.mods.tincraftclassic.item.ItemTinIngot;
 import io.github.randomusert.mods.tincraftclassic.util.RegistryUtil;
 import io.github.randomusert.mods.tincraftclassic.util.SmeltingRecipes;
+import io.github.randomusert.mods.tincraftclassic.block.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -23,7 +24,8 @@ public class RegistrationHandler {
 
         final Item[] itemBlocks = {
                 new ItemBlock(ModBlocks.TIN_BLOCK).setRegistryName(ModBlocks.TIN_BLOCK.getRegistryName()),
-                new ItemBlock(ModBlocks.TIN_ORE).setRegistryName(ModBlocks.TIN_ORE.getRegistryName())
+                new ItemBlock(ModBlocks.TIN_ORE).setRegistryName(ModBlocks.TIN_ORE.getRegistryName()),
+                new ItemBlock(ModBlocks.TIN_GENERATOR).setRegistryName(Tags.MOD_ID, "tin_generator")
         };
 
         event.getRegistry().registerAll(items);
@@ -35,7 +37,8 @@ public class RegistrationHandler {
         Tincraftclassic.LOGGER.info("Registering blocks");
         final Block[] blocks = {
                 RegistryUtil.setBlockName(new Block(Material.IRON), "tin_block").setCreativeTab(Tincraftclassic.TCC_TAB),
-                RegistryUtil.setBlockName(new Block(Material.ROCK), "tin_ore").setCreativeTab(Tincraftclassic.TCC_TAB)
+                RegistryUtil.setBlockName(new Block(Material.ROCK), "tin_ore").setCreativeTab(Tincraftclassic.TCC_TAB),
+                RegistryUtil.setBlockName(new TinGenerator(), "tin_generator").setCreativeTab(Tincraftclassic.TCC_TAB),
         };
 
         event.getRegistry().registerAll(blocks);

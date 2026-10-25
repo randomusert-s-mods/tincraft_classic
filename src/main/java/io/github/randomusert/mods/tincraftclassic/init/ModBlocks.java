@@ -9,4 +9,5 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 public class ModBlocks {
     public static final Block TIN_BLOCK = null;
     public static final Block TIN_ORE = null;
+    public static final Block TIN_GENERATOR = null;
 }
